@@ -21,7 +21,7 @@ async function printWelcome() {
 async function printCredits() {
   const table = new cliTable();
   table.push([chalk.bold.yellow(' Star '), 'https://github.com/GnussonNet/cli-webserver'], [chalk.bold.cyan(' Follow '), 'https://github.com/GnussonNet']);
-  console.log('\n' + table.toString());
+  console.log('\n' + table.toString() + '\n');
 }
 
 async function printHelp() {
