@@ -1,0 +1,33 @@
+{
+  "name": "@gnussonnet/cli-webserver",
+  "version": "1.0.0",
+  "description": "Via a simple menu you can easily create and renew a webserver with SSL certificates for free",
+  "main": "src/index.js",
+  "bin": {
+    "@gnussonnet/cli-webserver": "bin/cli-webserver.js",
+    "cli-webserver": "bin/cli-webserver.js"
+  },
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "webserver",
+    "cli-webserver"
+  ],
+  "author": {
+    "name": "GnussonNet",
+    "email": "support@gnusson.net",
+    "url": "https://gnusson.net"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "arg": "^5.0.1",
+    "cli-table": "^0.3.11",
+    "inquirer": "^8.2.4"
+  }
+}
