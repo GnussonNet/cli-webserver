@@ -1,6 +1,7 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
 import { printWelcome, printCredits, printHelp, printVersion } from './prints.js';
+import { copyTemplate } from './main.js';
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
@@ -76,6 +77,8 @@ export async function cli(args) {
 
   // Prompt for missing options
   options = await promptForMissingOptions(options);
+
+  await copyTemplate(options);
 
   // Show the credits
   await printCredits();
