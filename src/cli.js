@@ -1,7 +1,7 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
 import { printWelcome, printCredits, printHelp, printVersion } from './prints.js';
-import { copyTemplate } from './main.js';
+import { developmentMenu, productionMenu } from './menus.js';
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
@@ -47,7 +47,10 @@ async function promptForMissingOptions(options) {
       type: 'list',
       name: 'environment',
       message: 'Which environment would you like to deploy to?',
-      choices: ['Development', 'Production'],
+      choices: [
+        { name: 'Development', value: 'development' },
+        { name: 'Production', value: 'production' },
+      ],
     });
   }
 
@@ -78,7 +81,8 @@ export async function cli(args) {
   // Prompt for missing options
   options = await promptForMissingOptions(options);
 
-  await copyTemplate(options);
+  if (options.environment.toLowerCase() === 'development') await developmentMenu();
+  if (options.environment.toLowerCase() === 'production') await productionMenu();
 
   // Show the credits
   await printCredits();
