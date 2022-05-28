@@ -11,6 +11,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,7 +32,11 @@
   "license": "MIT",
   "dependencies": {
     "arg": "^5.0.1",
+    "chalk": "^5.0.1",
     "cli-table": "^0.3.11",
-    "inquirer": "^8.2.4"
+    "cli-welcome": "^2.2.2",
+    "inquirer": "^8.2.4",
+    "listr": "^0.14.3",
+    "ncp": "^2.0.0"
   }
 }
