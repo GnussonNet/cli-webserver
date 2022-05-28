@@ -2,10 +2,12 @@ import inquirer from 'inquirer';
 import { PathPrompt } from 'inquirer-path';
 import fs from 'fs';
 
+// Register path prompt
 inquirer.prompt.registerPrompt('path', PathPrompt);
 
 async function developmentMenu(options) {
   const questions = [
+    // Ask user what to do
     {
       name: 'menu',
       type: 'checkbox',
@@ -20,6 +22,7 @@ async function developmentMenu(options) {
         else return 'Please select at least one option';
       },
     },
+    // If user wants to start webserver, ask for frontend path
     {
       type: 'path',
       name: 'frontend',
@@ -36,6 +39,7 @@ async function developmentMenu(options) {
         }
       },
     },
+    // If user wants to start webserver, ask for config file path
     {
       type: 'path',
       name: 'config',
@@ -53,6 +57,7 @@ async function developmentMenu(options) {
     },
   ];
 
+  // Handle answers and update options
   options = await inquirer.prompt(questions).then((answers) => {
     return {
       ...options,
@@ -65,6 +70,7 @@ async function developmentMenu(options) {
 
 async function productionMenu(options) {
   const questions = [
+    // Ask user what to do
     {
       name: 'menu',
       type: 'checkbox',
@@ -80,6 +86,7 @@ async function productionMenu(options) {
         else return 'Please select at least one option';
       },
     },
+    // If user wants to start webserver or install certificate, ask for domain
     {
       type: 'input',
       name: 'domain',
@@ -97,6 +104,7 @@ async function productionMenu(options) {
         }
       },
     },
+    // If user wants to start webserver, ask for frontend path
     {
       type: 'path',
       name: 'frontend',
@@ -113,6 +121,7 @@ async function productionMenu(options) {
         }
       },
     },
+    // If user wants to start webserver, ask for config file path
     {
       type: 'path',
       name: 'config',
@@ -128,6 +137,7 @@ async function productionMenu(options) {
         }
       },
     },
+    // If user wants to install certificate, ask for email
     {
       type: 'input',
       name: 'email',
@@ -147,6 +157,7 @@ async function productionMenu(options) {
     },
   ];
 
+  // Handle answers and update options
   options = await inquirer.prompt(questions).then((answers) => {
     return {
       ...options,
