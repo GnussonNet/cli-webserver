@@ -3,8 +3,10 @@ import cliWelcome from 'cli-welcome';
 import cliTable from 'cli-table';
 import { readJSON } from './util.js';
 
+// Information from the cli-webserver package.json file
 const pkg = readJSON(new URL('../package.json', import.meta.url));
 
+// Welcome message displaying at the start of the cli-webserver
 async function printWelcome() {
   cliWelcome({
     title: `cli-webserver`,
@@ -18,12 +20,14 @@ async function printWelcome() {
   });
 }
 
+// Displayed at the end of the cli-webserver, advising the user to support the project
 async function printCredits() {
   const table = new cliTable();
   table.push([chalk.bold.yellow(' Star '), 'https://github.com/GnussonNet/cli-webserver'], [chalk.bold.cyan(' Follow '), 'https://github.com/GnussonNet']);
   console.log('\n' + table.toString() + '\n');
 }
 
+// Display help message when --help option is passed
 async function printHelp() {
   console.log(`  Version: v${pkg.version}
   Via a simple menu you can easily create and renew a webserver with SSL certificates for free
@@ -50,6 +54,7 @@ async function printHelp() {
   `);
 }
 
+// Display version message when --version option is passed
 async function printVersion() {
   console.log(`v${pkg.version}`);
 }
