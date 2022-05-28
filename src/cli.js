@@ -4,6 +4,7 @@ import { printWelcome, printCredits, printHelp, printVersion } from './prints.js
 import { developmentMenu, productionMenu } from './menus.js';
 
 function parseArgumentsIntoOptions(rawArgs) {
+  // All available args (options)
   const args = arg(
     {
       '--domain': String,
@@ -27,6 +28,7 @@ function parseArgumentsIntoOptions(rawArgs) {
       argv: rawArgs.slice(2),
     }
   );
+  // Returned options
   return {
     environment: args._[0],
     domain: args['--domain'] || '',
@@ -40,6 +42,7 @@ function parseArgumentsIntoOptions(rawArgs) {
   };
 }
 
+// Prompt user for all missing options
 async function promptForMissingOptions(options) {
   const questions = [];
   if (!options.environment) {
@@ -54,6 +57,7 @@ async function promptForMissingOptions(options) {
     });
   }
 
+  // Update options with any missing values
   const answers = await inquirer.prompt(questions);
   return {
     ...options,
@@ -65,7 +69,7 @@ export async function cli(args) {
   // Parse the arguments into options.
   let options = parseArgumentsIntoOptions(args);
 
-  // Check if version or help options were passed.
+  // Check if version or help options were passed. if so, print the appropriate message and exit.
   if (options.version) {
     await printVersion();
     process.exit(0);
@@ -81,8 +85,9 @@ export async function cli(args) {
   // Prompt for missing options
   options = await promptForMissingOptions(options);
 
-  if (options.environment.toLowerCase() === 'development') await developmentMenu();
-  if (options.environment.toLowerCase() === 'production') await productionMenu();
+  // Prompt for what to do
+  if (options.environment.toLowerCase() === 'development') options = await developmentMenu(options);
+  if (options.environment.toLowerCase() === 'production') options = await productionMenu(options);
 
   // Show the credits
   await printCredits();
