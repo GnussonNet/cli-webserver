@@ -9,7 +9,7 @@ const pkg = readJSON(new URL('../package.json', import.meta.url));
 // Welcome message displaying at the start of the cli-webserver
 async function printWelcome() {
   cliWelcome({
-    title: `cli-webserver`,
+    title: pkg.name,
     tagLine: `by ${pkg.author.name}`,
     description: `${pkg.description}`,
     bgColor: `#5683ff`,
