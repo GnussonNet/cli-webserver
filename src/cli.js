@@ -1,7 +1,8 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
-import { printWelcome, printCredits, printHelp, printVersion } from './prints.js';
+import { printWelcome, printCredits, printHelp, printVersion, printHelpNotice } from './prints.js';
 import { developmentMenu, productionMenu } from './menus.js';
+import { copyTemplate } from './main.js';
 
 function parseArgumentsIntoOptions(rawArgs) {
   // All available args (options)
@@ -81,6 +82,16 @@ export async function cli(args) {
 
   // Welcome the user
   await printWelcome();
+
+  // Check if template option was passed. if so, copy the template and exit.
+  if (options.template) {
+    await copyTemplate(options);
+    await printCredits();
+    process.exit(0);
+  }
+
+  // Inform user to create a config file or generate a template config file if one doesn't exist.
+  await printHelpNotice();
 
   // Prompt for missing options
   options = await promptForMissingOptions(options);
