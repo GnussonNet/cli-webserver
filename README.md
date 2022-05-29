@@ -4,7 +4,7 @@
   <img src="https://github.com/GnussonNet/cli-webserver/blob/master/.github/logo.svg" alt="logo" width="200" height="200">
   </a>
 
-  <h1 align="center">🔥 Webserver with SSL Certificate🔥</h1>
+  <h1 align="center">🔥 cli-webserver, simplifies webservers 🔥</h1>
 
   <p align="center">
 		<a href="https://github.com/GnussonNet/cli-webserver/graphs/contributors"><img alt="Downloads per month" src="https://img.shields.io/github/contributors/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
