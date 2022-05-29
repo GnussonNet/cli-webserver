@@ -1,8 +1,10 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
-import { printWelcome, printCredits, printHelp, printVersion, printHelpNotice } from './prints.js';
+import { printWelcome, printCredits, printHelp, printVersion } from './prints.js';
 import { developmentMenu, productionMenu } from './menus.js';
-import { copyTemplate } from './main.js';
+import { copyTemplate } from './actions.js';
+import main from './main.js';
+import chalk from 'chalk';
 
 function parseArgumentsIntoOptions(rawArgs) {
   // All available args (options)
@@ -90,16 +92,25 @@ export async function cli(args) {
     process.exit(0);
   }
 
-  // Inform user to create a config file or generate a template config file if one doesn't exist.
-  await printHelpNotice();
-
   // Prompt for missing options
+  console.log(chalk.bold.gray.underline('[questions]'));
   options = await promptForMissingOptions(options);
 
   // Prompt for what to do
   if (options.environment.toLowerCase() === 'development') options = await developmentMenu(options);
   if (options.environment.toLowerCase() === 'production') options = await productionMenu(options);
 
-  // Show the credits
-  await printCredits();
+  // Execute users choice(s)
+  console.log('\n' + chalk.bold.gray.underline('[jobs]'));
+  const errors = await main(options);
+
+  // Display errors or success message
+  console.log('\n' + chalk.bold.gray.underline('[complected]'));
+  if (errors === 0) {
+    console.log(chalk.bold.green('\u2714') + ' Success, no errors occurred.\n');
+  } else if (errors === 1) {
+    console.log(chalk.bold.hex('#FF6C8D')('✖ ') + errors + ' error occurred.\n');
+  } else if (errors > 1) {
+    console.log(chalk.bold.hex('#FF6C8D')('✖ ') + errors + ' errors occurred.\n');
+  }
 }
