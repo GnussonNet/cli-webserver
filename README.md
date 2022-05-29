@@ -7,8 +7,8 @@
   <h1 align="center">🔥 Webserver with SSL Certificate🔥</h1>
 
   <p align="center">
-		<a href="https://github.com/GnussonNet/cli-webserver/graphs/contributors"><img alt="Downloads per month" src="https://img.shields.io/github/contributors/GnussonNet/cli-webserversvg?style=for-the-badge"/></a>
-<a href="https://github.com/GnussonNet/cli-webserver/network/members"><img alt="NPM Version" src="https://img.shields.io/github/forks/GnussonNet/cli-webserversvg?style=for-the-badge"/></a>
+		<a href="https://github.com/GnussonNet/cli-webserver/graphs/contributors"><img alt="Downloads per month" src="https://img.shields.io/github/contributors/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
+<a href="https://github.com/GnussonNet/cli-webserver/network/members"><img alt="NPM Version" src="https://img.shields.io/github/forks/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
 <a href="https://github.com/GnussonNet/cli-webserver/stargazers"><img alt="Dependencies" src="https://img.shields.io/github/stars/GnussonNet/cli-webserver.svg?style=for-the-badge"></a>
 <a href="https://github.com/GnussonNet/cli-webserver/issues"><img alt="Contributors" src="https://img.shields.io/github/issues/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
 <a href="https://github.com/GnussonNet/cli-webserver/blob/master/LICENSE"><img alt="Custom badge" src="https://img.shields.io/github/license/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
