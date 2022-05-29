@@ -59,4 +59,13 @@ async function printVersion() {
   console.log(`v${pkg.version}`);
 }
 
-export { printWelcome, printCredits, printHelp, printVersion };
+async function printHelpNotice() {
+  console.log(`
+${chalk.bold.yellowBright('First time using cli-webserver?')}
+If you haven't used cli-webserver before,
+make sure to ether create a config file or generate a template config file using ${chalk.yellowBright('-t, --template')}.
+  
+  `);
+}
+
+export { printWelcome, printCredits, printHelp, printVersion, printHelpNotice };
