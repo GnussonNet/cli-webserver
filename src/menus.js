@@ -22,6 +22,24 @@ async function developmentMenu(options) {
         else return 'Please select at least one option';
       },
     },
+    // If user wants to start webserver or install certificate, ask for domain
+    {
+      type: 'input',
+      name: 'domain',
+      message: 'What domain would you like to use?',
+      when(answers) {
+        return (!options.domain && answers.menu.includes('start'));
+      },
+      validate(answer) {
+        var expression = /^\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b/g;
+        var regex = new RegExp(expression);
+        if (answer.match(regex)) {
+          return true;
+        } else {
+          return 'Please enter a valid domain name';
+        }
+      },
+    },
     // If user wants to start webserver, ask for frontend path
     {
       type: 'path',
@@ -61,8 +79,10 @@ async function developmentMenu(options) {
   options = await inquirer.prompt(questions).then((answers) => {
     return {
       ...options,
+      domain: options.domain || (answers.domain === undefined ? '' : answers.domain),
       frontend: options.frontend || (answers.frontend === undefined ? '' : answers.frontend),
       config: options.config || (answers.config === undefined ? '' : answers.config),
+      run: answers.menu,
     };
   });
   return options;
@@ -165,6 +185,7 @@ async function productionMenu(options) {
       email: options.email || (answers.email === undefined ? '' : answers.email),
       frontend: options.frontend || (answers.frontend === undefined ? '' : answers.frontend),
       config: options.config || (answers.config === undefined ? '' : answers.config),
+      run: answers.menu,
     };
   });
   return options;
