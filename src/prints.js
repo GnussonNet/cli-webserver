@@ -23,7 +23,7 @@ async function printWelcome() {
 // Displayed at the end of the cli-webserver, advising the user to support the project
 async function printCredits() {
   const table = new cliTable();
-  table.push([chalk.bold.yellow(' Star '), 'https://github.com/GnussonNet/cli-webserver'], [chalk.bold.cyan(' Follow '), 'https://github.com/GnussonNet']);
+  table.push([chalk.bold.bgYellow(' Star '), 'https://github.com/GnussonNet/cli-webserver'], [chalk.bold.bgCyan(' Follow '), 'https://github.com/GnussonNet']);
   console.log('\n' + table.toString() + '\n');
 }
 
