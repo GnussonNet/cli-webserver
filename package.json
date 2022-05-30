@@ -8,7 +8,7 @@
   },
   "type": "module",
   "repository": "https://github.com/GnussonNet/cli-webserver",
-  "homepage": "https://github.com/GnussonNet/cli-webserver/blob/master/README.md",
+  "homepage": "https://github.com/GnussonNet/cli-webserver#readme",
   "publishConfig": {
     "access": "public"
   },
