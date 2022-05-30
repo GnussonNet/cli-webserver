@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 import cliWelcome from 'cli-welcome';
-import cliTable from 'cli-table';
 import { readJSON } from './util.js';
 
 // Information from the cli-webserver package.json file
@@ -18,13 +17,6 @@ async function printWelcome() {
     clear: true,
     version: pkg.version,
   });
-}
-
-// Displayed at the end of the cli-webserver, advising the user to support the project
-async function printCredits() {
-  const table = new cliTable();
-  table.push([chalk.bold.bgYellow.hex('#000')(' Star '), 'https://github.com/GnussonNet/cli-webserver'], [chalk.bold.bgCyan.hex('#000')(' Follow '), 'https://github.com/GnussonNet']);
-  console.log('\n' + table.toString() + '\n');
 }
 
 // Display help message when --help option is passed
@@ -59,4 +51,4 @@ async function printVersion() {
   console.log(`v${pkg.version}`);
 }
 
-export { printWelcome, printCredits, printHelp, printVersion };
+export { printWelcome, printHelp, printVersion };
