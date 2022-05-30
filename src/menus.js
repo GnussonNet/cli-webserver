@@ -12,8 +12,11 @@ async function templateMenu(options) {
       type: 'path',
       name: 'targetDirectory',
       message: 'Where do you want to copy template files to?',
+      directoryOnly: true,
       validate(answer) {
-        if (fs.existsSync(answer)) {
+        var path = answer.split('/');
+        path.pop();
+        if (fs.existsSync(path.join('/'))) {
           return true;
         } else {
           return 'Please enter a valid path';
