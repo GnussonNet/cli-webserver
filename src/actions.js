@@ -4,9 +4,42 @@ import path from 'path';
 import { promisify } from 'util';
 import exec from 'await-exec';
 import ora from 'ora';
+import inquirer from 'inquirer';
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
+
+async function copyTemplateFiles(options) {
+  const spinnerCopy = ora('Copying template').start();
+  try {
+    await copy(options.templateDirectory, options.targetDirectory, { clobber: false });
+    spinnerCopy.succeed(`Template copied to '${options.targetDirectory}'`);
+  } catch (error) {
+    spinnerCopy.fail('Could not copy template files');
+    return false;
+  }
+
+  return true;
+}
+
+async function createDirectory(options) {
+  const pathArray = options.targetDirectory.split('/');
+
+  await inquirer
+    .prompt([
+      {
+        type: 'confirm',
+        name: 'createNew',
+        message: `"${pathArray[pathArray.length - 1]}" does not exist inside "${pathArray[pathArray.length - 2]}". Create it?`,
+      },
+    ])
+    .then((answer) => {
+      if (answer.createNew) {
+        return copyTemplateFiles(options);
+      }
+    });
+  return false;
+}
 
 async function copyTemplate(options) {
   options = {
@@ -21,24 +54,41 @@ async function copyTemplate(options) {
   );
   options.templateDirectory = templateDir;
 
-  const spinnerAccess = ora('Checking folder access').start();
-  try {
-    await access(templateDir, fs.constants.R_OK);
-    spinnerAccess.succeed('Folder access checked');
-  } catch (err) {
-    spinnerAccess.fail('Could not find templates folder');
+  // If template files exist, continue, else return false
+  const spinner = ora('Find template files').start();
+  if (
+    !(await fs.promises
+      .access(templateDir, fs.constants.R_OKP)
+      .then(async () => {
+        spinner.succeed('Template files found');
+        return true;
+      })
+      .catch((error) => {
+        spinner.fail('Template files not found');
+        return false;
+      }))
+  )
     return false;
-  }
-  const spinnerCopy = ora('Copying template').start();
-  try {
-    await copy(options.templateDirectory, options.targetDirectory, { clobber: false });
-    spinnerCopy.succeed(`Template copied to '${options.targetDirectory}'`);
-  } catch (error) {
-    spinnerCopy.fail('Could not copy template files');
-    return false;
+
+  // If target directory exists, continue, else return false
+  spinner.start('Check if target directory exists');
+  if (
+    !(await fs.promises
+      .access(options.targetDirectory, fs.constants.R_OKP)
+      .then(async () => {
+        spinner.succeed('Target directory exists');
+        return true;
+      })
+      .catch((error) => {
+        spinner.info('Target directory does not exist');
+        return false;
+      }))
+  ) {
+    return await createDirectory(options);
   }
 
-  return true;
+  // Copy template files to target directory
+  return copyTemplateFiles(options);
 }
 
 async function startWebserver(options) {
