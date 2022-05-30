@@ -1,20 +1,12 @@
-import chalk from 'chalk';
 import fs from 'fs';
 import ncp from 'ncp';
 import path from 'path';
 import { promisify } from 'util';
-import Listr from 'listr';
 import exec from 'await-exec';
 import ora from 'ora';
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
-
-async function copyTemplateFiles(options) {
-  return copy(options.templateDirectory, options.targetDirectory, {
-    clobber: false,
-  });
-}
 
 async function copyTemplate(options) {
   options = {
@@ -29,23 +21,23 @@ async function copyTemplate(options) {
   );
   options.templateDirectory = templateDir;
 
+  const spinnerAccess = ora('Checking folder access').start();
   try {
     await access(templateDir, fs.constants.R_OK);
+    spinnerAccess.succeed('Folder access checked');
   } catch (err) {
-    console.error('%s Something went wrong... could not find templates folder', chalk.red.bold('ERROR'));
-    process.exit(1);
+    spinnerAccess.fail('Could not find templates folder');
+    return false;
+  }
+  const spinnerCopy = ora('Copying template').start();
+  try {
+    await copy(options.templateDirectory, options.targetDirectory, { clobber: false });
+    spinnerCopy.succeed(`Template copied to '${options.targetDirectory}'`);
+  } catch (error) {
+    spinnerCopy.fail('Could not copy template files');
+    return false;
   }
 
-  const tasks = new Listr([
-    {
-      title: 'Copy template files',
-      task: () => copyTemplateFiles(options),
-      skip: () => (!options.template ? 'Pass --template to automatically copy template files' : undefined),
-    },
-  ]);
-
-  await tasks.run();
-  console.log('\n%s Project ready', chalk.green.bold('DONE'));
   return true;
 }
 
