@@ -35,11 +35,9 @@
     "arg": "^5.0.1",
     "await-exec": "^0.1.2",
     "chalk": "^5.0.1",
-    "cli-table": "^0.3.11",
     "cli-welcome": "^2.2.2",
     "inquirer": "^8.2.4",
     "inquirer-path": "^1.0.0-beta5",
-    "listr": "^0.14.3",
     "ncp": "^2.0.0",
     "ora": "^6.1.0"
   }
