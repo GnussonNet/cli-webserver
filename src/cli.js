@@ -1,8 +1,7 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
-import { printWelcome, printCredits, printHelp, printVersion } from './prints.js';
-import { developmentMenu, productionMenu } from './menus.js';
-import { copyTemplate } from './actions.js';
+import { printWelcome, printHelp, printVersion } from './prints.js';
+import { templateMenu, developmentMenu, productionMenu } from './menus.js';
 import main from './main.js';
 import chalk from 'chalk';
 
@@ -69,6 +68,7 @@ async function promptForMissingOptions(options) {
 }
 
 export async function cli(args) {
+  let errors = 0;
   // Parse the arguments into options.
   let options = parseArgumentsIntoOptions(args);
 
@@ -85,24 +85,24 @@ export async function cli(args) {
   // Welcome the user
   await printWelcome();
 
-  // Check if template option was passed. if so, copy the template and exit.
-  if (options.template) {
-    await copyTemplate(options);
-    await printCredits();
-    process.exit(0);
+  if (!options.template) {
+    // Prompt for missing options
+    console.log(chalk.bold.gray.underline('[questions]'));
+    options = await promptForMissingOptions(options);
+
+    // Prompt for what to do if template is not passed.
+    if (options.environment.toLowerCase() === 'development') options = await developmentMenu(options);
+    if (options.environment.toLowerCase() === 'production') options = await productionMenu(options);
   }
-
-  // Prompt for missing options
-  console.log(chalk.bold.gray.underline('[questions]'));
-  options = await promptForMissingOptions(options);
-
-  // Prompt for what to do
-  if (options.environment.toLowerCase() === 'development') options = await developmentMenu(options);
-  if (options.environment.toLowerCase() === 'production') options = await productionMenu(options);
+  else {
+    // If template is passed, prompt for location.
+    options = await templateMenu(options);
+  }
 
   // Execute users choice(s)
   console.log('\n' + chalk.bold.gray.underline('[jobs]'));
-  const errors = await main(options);
+  const errorsQuantity = await main(options);
+  errors = errors + errorsQuantity;
 
   // Display errors or success message
   console.log('\n' + chalk.bold.gray.underline('[complected]'));
