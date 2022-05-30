@@ -5,6 +5,33 @@ import fs from 'fs';
 // Register path prompt
 inquirer.prompt.registerPrompt('path', PathPrompt);
 
+async function templateMenu(options) {
+  const questions = [
+    // Ask where template files should be copied to
+    {
+      type: 'path',
+      name: 'targetDirectory',
+      message: 'Where do you want to copy template files to?',
+      validate(answer) {
+        if (fs.existsSync(answer)) {
+          return true;
+        } else {
+          return 'Please enter a valid path';
+        }
+      },
+    },
+  ];
+
+  // Handle answers and update options
+  options = await inquirer.prompt(questions).then((answers) => {
+    return {
+      ...options,
+      targetDirectory: options.targetDirectory || answers.targetDirectory,
+    };
+  });
+  return options;
+}
+
 async function developmentMenu(options) {
   const questions = [
     // Ask user what to do
@@ -28,7 +55,7 @@ async function developmentMenu(options) {
       name: 'domain',
       message: 'What domain would you like to use?',
       when(answers) {
-        return (!options.domain && answers.menu.includes('start'));
+        return !options.domain && answers.menu.includes('start');
       },
       validate(answer) {
         var expression = /^\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b/g;
@@ -191,4 +218,4 @@ async function productionMenu(options) {
   return options;
 }
 
-export { developmentMenu, productionMenu };
+export { templateMenu, developmentMenu, productionMenu };

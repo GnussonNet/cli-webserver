@@ -3,6 +3,12 @@ import { copyTemplate, startWebserver, reloadWebserver, stopWebserver, installCe
 let errors = 0;
 
 export default async (options) => {
+  if (options.template) {
+    await copyTemplate(options).then((result) => {
+      if (result === false) return errors++;
+    });
+    return errors;
+  }
   if (options.run.includes('start'))
     await startWebserver(options).then((result) => {
       if (result === false) errors++;
