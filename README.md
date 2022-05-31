@@ -65,9 +65,10 @@
 <br />
 
 ## Built With
+* [Node](https://nodejs.org)
 * [Docker](https://www.docker.com/)
 * [NGINX](https://nginx.org/)
-* [Bash (scripts)](https://www.gnu.org/software/bash/)
+* [NPM Dependencies](hhttps://www.npmjs.com/package/cli-webserver)
 
 <br />
 
@@ -76,20 +77,19 @@
 This project is still under development which means it have not been tested on other machines, USE AT YOUR OWN RISK.
 
 ### Perquisites
-Your system must have these following packages installed:
+Your system must have these following packages installed and running:
 
-* [Docker](https://www.docker.com/)
+* [Docker](https://www.docker.com)
+* [Node](https://nodejs.org)
 
 ### Installation
-1. Clone this repo and cd into directory
+1. Install via NPM (globally)
    ```sh
    npm install -g cli-webserver
    ```
    
 ### Uninstall
-For now simply remove the file form /usr/local/bin with `rm` (DO AT YOUR OWN RISK)
-
-1. Clone this repo and cd into directory
+1. Uninstall via NPM (globally)
    ```sh
    npm uninstall -g cli-webserver
    ```
@@ -100,7 +100,11 @@ For now simply remove the file form /usr/local/bin with `rm` (DO AT YOUR OWN RIS
 This script is farley straight forward to use
 
 ### Setup Webserver
-1. Run the script
+1. Run the CLI
+   ```sh
+   webserver <environment> [options]
+   ```
+   or
    ```sh
    cli-webserver <environment> [options]
    ```
@@ -110,7 +114,7 @@ This script is farley straight forward to use
 ### Webserver command-line options
 Option | Arguments  | Description
 ---|---|---
--m | `dev/development` `prod/production` | Skips first question regarding dev/prod menu | null
+environment | `development`, `production` | Skips first question regarding dev/prod menu | null
 -d | `domain.com` | Your domain is passed to Certbot and NGINX | null
 -f | `PATH to frontend directory` | Path to your frontend directory | null
 -c | `PATH to nginx config file` | Path to your nginx config file | null
