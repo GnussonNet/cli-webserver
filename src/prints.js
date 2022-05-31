@@ -2,10 +2,10 @@ import chalk from 'chalk';
 import cliWelcome from 'cli-welcome';
 import { readJSON } from './util.js';
 
-// Information from the webserver-cli package.json file
+// Information from the cli-webserver package.json file
 const pkg = readJSON(new URL('../package.json', import.meta.url));
 
-// Welcome message displaying at the start of the webserver-cli
+// Welcome message displaying at the start of the cli-webserver
 async function printWelcome() {
   cliWelcome({
     title: pkg.name,
@@ -26,7 +26,7 @@ async function printHelp() {
   
   ${chalk.bold.bgGreenBright(' Usage ')}
 
-  ${chalk.white('$')} ${chalk.bold.greenBright('webserver-cli')} ${chalk.cyanBright('<environment>')} ${chalk.yellowBright('[options]')}
+  ${chalk.white('$')} ${chalk.bold.greenBright('cli-webserver')} ${chalk.cyanBright('<environment>')} ${chalk.yellowBright('[options]')}
   
   ${chalk.bold.bgCyanBright(' Environments ')}
 
@@ -41,7 +41,7 @@ async function printHelp() {
   ${chalk.yellowBright('-p, --port')}        Port number of the webserver
   ${chalk.yellowBright('-e, --email')}       Email address of the webserver
   ${chalk.yellowBright('-t, --template')}    Generate a template config file
-  ${chalk.yellowBright('-v, --version')}     Print the version of the webserver-cli
+  ${chalk.yellowBright('-v, --version')}     Print the version of the cli-webserver
   ${chalk.yellowBright('-h, --help')}        Print this help message
   `);
 }

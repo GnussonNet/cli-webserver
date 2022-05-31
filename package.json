@@ -1,15 +1,15 @@
 {
-  "name": "webserver-cli",
-  "version": "0.0.0",
+  "name": "cli-webserver",
+  "version": "0.0.4",
   "description": "This CLI simplifies the creation and renewal of a webserver running with SSL certificates. With a modified Nginx Dockerfile and Let's Encrypts client called Certbot, it takes seconds to be up and running.",
   "main": "src/index.js",
   "bin": {
-    "webserver-cli": "bin/webserver-cli.js",
-    "webserver": "bin/webserver-cli.js"
+    "cli-webserver": "bin/cli-webserver.js",
+    "webserver": "bin/cli-webserver.js"
   },
   "type": "module",
-  "repository": "https://github.com/GnussonNet/webserver-cli",
-  "homepage": "https://github.com/GnussonNet/webserver-cli#readme",
+  "repository": "https://github.com/GnussonNet/cli-webserver",
+  "homepage": "https://github.com/GnussonNet/cli-webserver#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -24,7 +24,7 @@
   "keywords": [
     "cli",
     "webserver",
-    "webserver-cli"
+    "cli-webserver"
   ],
   "author": {
     "name": "GnussonNet",

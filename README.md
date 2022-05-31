@@ -1,17 +1,17 @@
 <br />
 <div align="center">
-  <a href="https://github.com/GnussonNet/webserver-cli">
-  <img src="https://github.com/GnussonNet/webserver-cli/blob/master/.github/logo.svg" alt="logo" width="200" height="200">
+  <a href="https://github.com/GnussonNet/cli-webserver">
+  <img src="https://github.com/GnussonNet/cli-webserver/blob/master/.github/logo.svg" alt="logo" width="200" height="200">
   </a>
 
-  <h1 align="center">🔥 webserver-cli, simplifies webservers 🔥</h1>
+  <h1 align="center">🔥 cli-webserver, simplifies webservers 🔥</h1>
 
   <p align="center">
-		<a href="https://github.com/GnussonNet/webserver-cli/graphs/contributors"><img alt="Downloads per month" src="https://img.shields.io/github/contributors/GnussonNet/webserver-cli.svg?style=for-the-badge"/></a>
-<a href="https://github.com/GnussonNet/webserver-cli/network/members"><img alt="NPM Version" src="https://img.shields.io/github/forks/GnussonNet/webserver-cli.svg?style=for-the-badge"/></a>
-<a href="https://github.com/GnussonNet/webserver-cli/stargazers"><img alt="Dependencies" src="https://img.shields.io/github/stars/GnussonNet/webserver-cli.svg?style=for-the-badge"></a>
-<a href="https://github.com/GnussonNet/webserver-cli/issues"><img alt="Contributors" src="https://img.shields.io/github/issues/GnussonNet/webserver-cli.svg?style=for-the-badge"/></a>
-<a href="https://github.com/GnussonNet/webserver-cli/blob/master/LICENSE"><img alt="Custom badge" src="https://img.shields.io/github/license/GnussonNet/webserver-cli.svg?style=for-the-badge"/></a>
+		<a href="https://github.com/GnussonNet/cli-webserver/graphs/contributors"><img alt="Downloads per month" src="https://img.shields.io/github/contributors/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
+<a href="https://github.com/GnussonNet/cli-webserver/network/members"><img alt="NPM Version" src="https://img.shields.io/github/forks/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
+<a href="https://github.com/GnussonNet/cli-webserver/stargazers"><img alt="Dependencies" src="https://img.shields.io/github/stars/GnussonNet/cli-webserver.svg?style=for-the-badge"></a>
+<a href="https://github.com/GnussonNet/cli-webserver/issues"><img alt="Contributors" src="https://img.shields.io/github/issues/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
+<a href="https://github.com/GnussonNet/cli-webserver/blob/master/LICENSE"><img alt="Custom badge" src="https://img.shields.io/github/license/GnussonNet/cli-webserver.svg?style=for-the-badge"/></a>
 <a href="https://linkedin.com/in/gnussonnet"><img alt="Maintained" src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555"/></a>
 	</p>
 
@@ -19,24 +19,24 @@
     This CLI simplifies the creation and renewal of a webserver running with SSL certificates. With a modified Nginx Dockerfile and <a href="https://letsencrypt.org/">Let's Encrypts</a> client called <a href="https://github.com/certbot/certbot">Certbot</a>, it takes seconds to be up and running.
     <br />
     <br />
-    <a href="https://github.com/GnussonNet/webserver-cli/issues/new?assignees=&labels=&template=bug_report.md">🕵🏽 Report Bug</a>
+    <a href="https://github.com/GnussonNet/cli-webserver/issues/new?assignees=&labels=&template=bug_report.md">🕵🏽 Report Bug</a>
     -
     <a href="#contact">✍🏼 Contact</a>
     -
-    <a href="https://github.com/GnussonNet/webserver-cliissues/new?assignees=&labels=&template=feature_request.md">🙇 Request Feature</a>
+    <a href="https://github.com/GnussonNet/cli-webserverissues/new?assignees=&labels=&template=feature_request.md">🙇 Request Feature</a>
   </p>
 </div>
 
 <br />
 
-<img title="Product Screenshot" alt="Product screenshot" src="https://github.com/GnussonNet/webserver-cli/blob/master/.github/preview.png">
+<img title="Product Screenshot" alt="Product screenshot" src="https://github.com/GnussonNet/cli-webserver/blob/master/.github/preview.png">
 
 <br />
 
 ## Table of Contents
 <ol>
   <li>
-    <a href="#webserver-cli-with-ssl">About The Project</a>
+    <a href="#cli-webserver-with-ssl">About The Project</a>
     <ul>
       <li><a href="#built-with">Built With</a></li>
     </ul>
@@ -68,7 +68,7 @@
 * [Node](https://nodejs.org)
 * [Docker](https://www.docker.com/)
 * [NGINX](https://nginx.org/)
-* [NPM Dependencies](hhttps://www.npmjs.com/package/webserver-cli)
+* [NPM Dependencies](hhttps://www.npmjs.com/package/cli-webserver)
 
 <br />
 
@@ -85,13 +85,13 @@ Your system must have these following packages installed and running:
 ### Installation
 1. Install via NPM (globally)
    ```sh
-   npm install -g webserver-cli
+   npm install -g cli-webserver
    ```
    
 ### Uninstall
 1. Uninstall via NPM (globally)
    ```sh
-   npm uninstall -g webserver-cli
+   npm uninstall -g cli-webserver
    ```
 
 <br />
@@ -106,7 +106,7 @@ This script is farley straight forward to use
    ```
    or
    ```sh
-   webserver-cli <environment> [options]
+   cli-webserver <environment> [options]
    ```
 
    Then follow the instructions on the screen
@@ -146,7 +146,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 Filip "Gnusson" Magnusson - [@GnussonNet](https://twitter.com/GnussonNet) - admin@gnusson.net
 
-Project Link: [Github.com/GnussonNet/webserver-cli(https://github.com/GnussonNet/webserver-cli)
+Project Link: [Github.com/GnussonNet/cli-webserver(https://github.com/GnussonNet/cli-webserver)
 
 <br />
 
