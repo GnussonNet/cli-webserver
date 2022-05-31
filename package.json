@@ -1,6 +1,6 @@
 {
   "name": "cli-webserver",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "This CLI simplifies the creation and renewal of a webserver running with SSL certificates. With a modified Nginx Dockerfile and Let's Encrypts client called Certbot, it takes seconds to be up and running.",
   "main": "src/index.js",
   "bin": {
