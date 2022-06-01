@@ -142,7 +142,7 @@ async function productionMenu(options) {
       name: 'domain',
       message: 'What domain would you like to use?',
       when(answers) {
-        return (!options.domain && answers.menu.includes('start')) || answers.menu.includes('installCert');
+        return !options.domain && (answers.menu.includes('start') || answers.menu.includes('installCert'));
       },
       validate(answer) {
         var expression = /^\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b/g;
