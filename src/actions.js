@@ -116,11 +116,11 @@ async function startWebserver(options) {
   }
 }
 
-async function reloadWebserver(options) {
-  const spinner = ora('Reloading webserver').start();
+async function restartWebserver(options) {
+  const spinner = ora('Restarting webserver').start();
   try {
-    await exec(`docker kill -s HUP webserver`).then((stdout) => {
-      spinner.succeed('Webserver reloaded');
+    await exec(`docker restart webserver`).then((stdout) => {
+      spinner.succeed('Webserver restarted');
       return true;
     });
   } catch (error) {
@@ -161,4 +161,4 @@ async function installCertificate(options) {
   }
 }
 
-export { copyTemplate, startWebserver, reloadWebserver, stopWebserver, installCertificate };
+export { copyTemplate, startWebserver, restartWebserver, stopWebserver, installCertificate };

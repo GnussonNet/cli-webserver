@@ -44,7 +44,7 @@ async function developmentMenu(options) {
       message: 'What would you like to do?',
       choices: [
         { name: 'Start Webserver', value: 'start' },
-        { name: 'Reload Webserver', value: 'reload' },
+        { name: 'Restart Webserver', value: 'restart' },
         { name: 'Stop Webserver', value: 'stop' },
       ],
       validate(answer) {
@@ -128,7 +128,7 @@ async function productionMenu(options) {
       choices: [
         { name: 'Start Webserver', value: 'start' },
         { name: 'Install Certificate', value: 'installCert' },
-        { name: 'Reload Webserver', value: 'reload' },
+        { name: 'Restart Webserver', value: 'restart' },
         { name: 'Stop Webserver', value: 'stop' },
       ],
       validate(answer) {

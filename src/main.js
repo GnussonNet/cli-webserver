@@ -1,4 +1,4 @@
-import { copyTemplate, startWebserver, reloadWebserver, stopWebserver, installCertificate } from './actions.js';
+import { copyTemplate, startWebserver, restartWebserver, stopWebserver, installCertificate } from './actions.js';
 
 let errors = 0;
 
@@ -13,8 +13,8 @@ export default async (options) => {
     await startWebserver(options).then((result) => {
       if (result === false) errors++;
     });
-  if (options.run.includes('reload'))
-    await reloadWebserver(options).then((result) => {
+  if (options.run.includes('restart'))
+    await restartWebserver(options).then((result) => {
       if (result === false) errors++;
     });
   if (options.run.includes('stop'))
