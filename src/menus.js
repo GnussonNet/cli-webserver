@@ -1,6 +1,7 @@
 import inquirer from 'inquirer';
 import { PathPrompt } from 'inquirer-path';
 import fs from 'fs';
+import chalk from 'chalk';
 
 // Register path prompt
 inquirer.prompt.registerPrompt('path', PathPrompt);
@@ -205,6 +206,28 @@ async function productionMenu(options) {
         }
       },
     },
+    {
+      type: 'confirm',
+      name: 'agreeTos',
+      message: `${chalk.bold.bgYellowBright.hex('#000')('FROM CERTBOT:')} Please read the Terms of Service at
+  https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
+  agree in order to register with the ACME server. Do you agree?`,
+      when(answers) {
+        return !options.agreeTos && answers.menu.includes('installCert');
+      },
+    },
+    {
+      type: 'confirm',
+      name: 'agreeEmail',
+      message: `${chalk.bold.bgYellowBright.hex('#000')('FROM CERTBOT:')} Would you be willing, once your first certificate is successfully issued, to
+  share your email address with the Electronic Frontier Foundation, a founding
+  partner of the Let's Encrypt project and the non-profit organization that
+  develops Certbot? We'd like to send you email about our work encrypting the web,
+  EFF news, campaigns, and ways to support digital freedom.`,
+      when(answers) {
+        return !options.agreeEmail && answers.menu.includes('installCert');
+      },
+    },
   ];
 
   // Handle answers and update options
@@ -216,6 +239,8 @@ async function productionMenu(options) {
       frontend: options.frontend || (answers.frontend === undefined ? '' : answers.frontend),
       config: options.config || (answers.config === undefined ? '' : answers.config),
       run: answers.menu,
+      agreeTos: options.agreeTos || answers.agreeTos,
+      agreeEmail: options.agreeEmail || answers.agreeEmail,
     };
   });
   return options;

@@ -5,10 +5,20 @@ import { promisify } from 'util';
 import exec from 'await-exec';
 import ora from 'ora';
 import inquirer from 'inquirer';
+import chalk from 'chalk';
 
+// Promisify file system functions
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
+// Execute exec function with callback
+async function execute(command, callback) {
+  await exec(command, function (error, stdout, stderr) {
+    callback(stdout);
+  });
+}
+
+// Copy Template Files to Target Directory
 async function copyTemplateFiles(options) {
   const spinnerCopy = ora('Copying template').start();
   try {
@@ -22,6 +32,7 @@ async function copyTemplateFiles(options) {
   return true;
 }
 
+// Prompt to create missing directory
 async function createDirectory(options) {
   const pathArray = options.targetDirectory.split('/');
 
@@ -41,6 +52,7 @@ async function createDirectory(options) {
   return false;
 }
 
+// Copy template function
 async function copyTemplate(options) {
   options = {
     ...options,
@@ -91,6 +103,7 @@ async function copyTemplate(options) {
   return copyTemplateFiles(options);
 }
 
+// Start webserver using docker image
 async function startWebserver(options) {
   const spinner = ora('Starting webserver').start();
   try {
@@ -116,6 +129,7 @@ async function startWebserver(options) {
   }
 }
 
+// Restart docker container
 async function restartWebserver(options) {
   const spinner = ora('Restarting webserver').start();
   try {
@@ -131,6 +145,7 @@ async function restartWebserver(options) {
   }
 }
 
+// Stop docker container
 async function stopWebserver(options) {
   const spinner = ora('Stopping webserver').start();
   try {
@@ -146,16 +161,23 @@ async function stopWebserver(options) {
   }
 }
 
+// Install Let's Encrypt certificate using Certbot and docker
 async function installCertificate(options) {
   const spinner = ora('Installing certificate').start();
+  if (!options.agreeTos) {
+    spinner.fail("You must agree to the Let's Encrypt terms of service to install a certificate");
+    return false;
+  }
   try {
-    await exec(`docker exec -ti webserver certbot --nginx --email ${options.email} --redirect -d ${options.domain}`).then((stdout) => {
+    await execute(`docker exec -t webserver certbot --nginx --email ${options.email} ${options.agreeEmail === true ? '--eff-email' : '--no-eff-email'} ${options.agreeTos && '--agree-tos'} --redirect -d ${options.domain}`).then((callback) => {
+      console.log(callback.stdout);
       spinner.succeed('Certificate installed');
       return true;
     });
   } catch (error) {
-    if (error.stderr) {
-      spinner.fail(error.stderr);
+    if (error.stderr || error.stdout) {
+      spinner.fail('Failed to install Certificate');
+      console.error(`${chalk.bold.bgRedBright.hex('#000')('\nFROM CERTBOT:\n')}${error.stderr || error.stdout}`);
       return false;
     }
   }
