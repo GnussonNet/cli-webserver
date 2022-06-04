@@ -108,12 +108,12 @@ async function startWebserver(options) {
   const spinner = ora('Starting webserver').start();
   try {
     if (options.environment === 'development') {
-      await exec(`docker run -it --rm -d -p ${options.port}:80 --name webserver -v ${options.frontend}:/var/www/${options.domain} -v ${options.config}:/etc/nginx/sites-enabled/${options.domain} ghcr.io/gnussonnet/webserver:latest`).then((stdout) => {
+      await exec(`docker run -it --rm -d -p ${options.port}:80 --name webserver -v ${options.frontend}:/var/www/${options.domain} -v ${options.config}:/etc/nginx/sites-enabled/${options.domain} gnusson/cli-webserver:latest`).then((stdout) => {
         spinner.succeed('Webserver started');
         return true;
       });
     } else if (options.environment === 'production') {
-      await exec(`docker run -it --rm -d -p 80:80 -p 443:443 --name webserver -v ${options.frontend}:/var/www/${options.domain} -v ${options.config}:/etc/nginx/sites-enabled/${options.domain} ghcr.io/gnussonnet/webserver:latest`).then((stdout) => {
+      await exec(`docker run -it --rm -d -p 80:80 -p 443:443 --name webserver -v ${options.frontend}:/var/www/${options.domain} -v ${options.config}:/etc/nginx/sites-enabled/${options.domain} gnusson/cli-webserver:latest`).then((stdout) => {
         spinner.succeed('Webserver started');
         return true;
       });
