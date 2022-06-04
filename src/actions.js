@@ -170,7 +170,6 @@ async function installCertificate(options) {
   }
   try {
     await execute(`docker exec -t webserver certbot --nginx --email ${options.email} ${options.agreeEmail === true ? '--eff-email' : '--no-eff-email'} ${options.agreeTos && '--agree-tos'} --redirect -d ${options.domain}`).then((callback) => {
-      console.log(callback.stdout);
       spinner.succeed('Certificate installed');
       return true;
     });
