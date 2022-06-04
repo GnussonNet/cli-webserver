@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "bin": {
     "cli-webserver": "bin/cli-webserver.js",
+    "cliWebserver": "bin/cli-webserver.js",
     "webserver": "bin/cli-webserver.js"
   },
   "type": "module",
