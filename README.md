@@ -104,6 +104,10 @@ This script is farley straight forward to use
    ```sh
    webserver <environment> [options]
    ```
+    or
+   ```sh
+   cliWebserver <environment> [options]
+   ```
    or
    ```sh
    cli-webserver <environment> [options]
